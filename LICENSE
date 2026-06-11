@@ -1,0 +1,23 @@
+MIT 6.S184 流匹配与扩散模型 — 中文翻译
+Copyright (c) 2026 ZhangMH
+
+本项目（中文翻译 + 配图裁剪脚本 + 项目组织）采用
+**Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+(CC BY-NC-ND 4.0)** 协议。
+
+您可以自由地：
+- 共享 — 在任何媒介以任何形式复制、发行本作品
+- 仅在署名的前提下，且**仅供个人学习使用**（非商业）
+
+但**不得**：
+- 改编、转换、二次创作本作品
+- 将本作品用于任何商业目的
+
+完整协议条款：https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh
+
+---
+
+源论文 *An Introduction to Flow Matching and Diffusion Models*
+by Peter Holderrieth & Ezra Erives 同样采用 CC BY-NC-ND 4.0 协议。
+本中文翻译仅是原论文的中文化版本，遵守原协议的"署名 + 非商业 + 相同方式共享"要求。
+源论文下载：https://arxiv.org/abs/2506.02070

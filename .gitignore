@@ -1,0 +1,83 @@
+# ============================================================
+# MIT6.S184 翻译项目 — .gitignore
+# ============================================================
+
+# -------- Python --------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Notebook
+.ipynb_checkpoints/
+
+# -------- PDF 提取中间产物 --------
+# 这些是从源 PDF 重新生成的，不需要进 git
+translations/work/
+*.pdf.tmp
+
+# 调试图片
+*.md.bak
+debug_*.png
+test_*.png
+_search.png
+_v2.png
+_v3.png
+_v4.png
+_v5.png
+_small.png
+_precise.png
+_check.png
+_tight.png
+_notrim.png
+
+# -------- 模型 / 数据 --------
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.h5
+*.hdf5
+data/raw/
+data/processed/
+
+# -------- 日志 --------
+*.log
+logs/
+nohup.out
+
+# -------- OS --------
+.DS_Store
+desktop.ini
+$RECYCLE.BIN/
