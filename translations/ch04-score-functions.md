@@ -22,12 +22,12 @@ $$
 
 让我们回到第 3 节中条件概率路径 $p_t(x\mid z)$ 与边缘概率路径 $p_t(x)$ 的设定。那么我们等价地可以定义**条件分数函数**为 $\nabla \log p_t(x\mid z)$，**边缘分数函数**为 $\nabla \log p_t(x)$。类似于式 (18)，边缘分数可以通过条件分数函数 $\nabla \log p_t(x\mid z)$ 表示为
 $$
-\nabla \log p_t(x) = \int \nabla \log p_t(x\mid z) \frac{p_t(x\mid z)\,p_{\text{data}}(z)}{p_t(x)} \, \mathrm{d}z. \tag{38}
+\nabla \log p_t(x) = \int \nabla \log p_t(x\mid z) \frac{p_t(x\mid z)\,p_{\text{data}}(z)}{p_t(x)} \, \mathrm{d}z. ^{ (38) }
 $$
 
 因此，条件分数与边缘分数之间的关系，类似于条件向量场与边缘向量场之间的关系。请注意，我们可以通过如下推导证明式 (38)：
 $$
-\nabla \log p_t(x) = \frac{\nabla p_t(x)}{p_t(x)} = \frac{\nabla \int p_t(x\mid z)\,p_{\text{data}}(z)\,\mathrm{d}z}{p_t(x)} = \int \nabla \log p_t(x\mid z) \frac{p_t(x\mid z)\,p_{\text{data}}(z)}{p_t(x)} \, \mathrm{d}z, \tag{39}
+\nabla \log p_t(x) = \frac{\nabla p_t(x)}{p_t(x)} = \frac{\nabla \int p_t(x\mid z)\,p_{\text{data}}(z)\,\mathrm{d}z}{p_t(x)} = \int \nabla \log p_t(x\mid z) \frac{p_t(x\mid z)\,p_{\text{data}}(z)}{p_t(x)} \, \mathrm{d}z, ^{ (39) }
 $$
 其中我们用到了 $\partial \log y = 1/y$（其中 $y$ 不依赖求导变量时的链式法则）的组合规则，链式法则应用了两次。
 
@@ -35,7 +35,7 @@ $$
 >
 > 对于高斯路径 $p_t(x\mid z) = \mathcal{N}(x;\,\alpha_t z,\,\beta_t^2 I_d)$，我们可以利用高斯概率密度的形式（见式 (97)）得到
 > $$
-> \nabla \log p_t(x\mid z) = \nabla \log \mathcal{N}(x;\,\alpha_t z,\,\beta_t^2 I_d) = -\frac{x - \alpha_t z}{\beta_t^2}. \tag{40}
+> \nabla \log p_t(x\mid z) = \nabla \log \mathcal{N}(x;\,\alpha_t z,\,\beta_t^2 I_d) = -\frac{x - \alpha_t z}{\beta_t^2}. ^{ (40) }
 > $$
 
 注意，高斯概率路径的分数函数是 $x$ 和 $z$ 的线性函数。条件向量场 $u_t(x\mid z)$ 也具有同样的性质（见式 (20)）。因此两者可以互相转换，下面的命题就说明了这一点。
@@ -44,10 +44,10 @@ $$
 >
 > 对于高斯概率路径 $p_t(x\mid z) = \mathcal{N}(\alpha_t z,\,\beta_t^2 I_d)$，条件（相应地，边缘）向量场与条件（相应地，边缘）分数由下式关联：
 > $$
-> u_t^{\text{target}}(x\mid z) = a_t \nabla \log p_t(x\mid z) + b_t x, \quad a_t = \frac{\beta_t^2}{\dot{\alpha}_t - \dot{\beta}_t \beta_t} \frac{\dot{\alpha}_t}{\alpha_t}, \quad b_t = \frac{\dot{\alpha}_t}{\alpha_t}. \tag{41}
+> u_t^{\text{target}}(x\mid z) = a_t \nabla \log p_t(x\mid z) + b_t x, \quad a_t = \frac{\beta_t^2}{\dot{\alpha}_t - \dot{\beta}_t \beta_t} \frac{\dot{\alpha}_t}{\alpha_t}, \quad b_t = \frac{\dot{\alpha}_t}{\alpha_t}. ^{ (41) }
 > $$
 > $$
-> u_t^{\text{target}}(x) = a_t \nabla \log p_t(x) + b_t x. \tag{42}
+> u_t^{\text{target}}(x) = a_t \nabla \log p_t(x) + b_t x. ^{ (42) }
 > $$
 >
 > 特别地，条件（相应地，边缘）向量场可以从条件（相应地，边缘）分数恢复，反之亦然。
@@ -80,7 +80,7 @@ $$
 > 由此推出，任何能恢复 $\mathbb{E}[z\mid x]$ 的量，都可用来恢复无条件向量场与分数。而且，从数值/训练稳定性的角度，这么做甚至常常更可取。
 > 一种常见的选择是直接用后验均值本身，它常被称为**去噪器（denoiser）**。形式上，我们定义条件去噪器与边缘去噪器为
 > $$
-> D_t(x\mid z) = z, \quad D_t(x) = \int z\,p_t(x\mid z)\,p_{\text{data}}(z)\,\mathrm{d}z \stackrel{(i)}{=} \frac{1}{\dot{\alpha}_t} \left(\beta_t u_t^{\text{target}}(x) - \frac{\dot{\beta}_t}{\beta_t} x\right). \tag{43}
+> D_t(x\mid z) = z, \quad D_t(x) = \int z\,p_t(x\mid z)\,p_{\text{data}}(z)\,\mathrm{d}z \stackrel{(i)}{=} \frac{1}{\dot{\alpha}_t} \left(\beta_t u_t^{\text{target}}(x) - \frac{\dot{\beta}_t}{\beta_t} x\right). ^{ (43) }
 > $$
 >
 > 其中 $(i)$ 由与命题 1 中类似的推导得出。去噪器有一个非常直观的解释：它是在给定被加噪数据 $x$ 的条件下，对干净数据 $z$ 的期望值。<sup>a</sup> 人们常把这类学习 $D_t$ 的模型称为**去噪扩散模型**，因为学习 $D_t$ 与学习 $u_t^{\text{target}}$ 在理论上是等价的。
@@ -102,10 +102,10 @@ $$
 > \mathrm{d}X_t &= u_t^{\text{target}}(X_t)\,\mathrm{d}t + \tfrac{\sigma_t^2}{2} \nabla \log p_t(X_t)\,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t \\
 > &= \left( u_t^{\text{target}}(X_t) + \tfrac{\sigma_t^2}{2} \nabla \log p_t(X_t) \right) \mathrm{d}t + \sigma_t \,\mathrm{d}W_t, \\
 > &\Rightarrow X_t \sim p_t \quad (0 \leq t \leq 1).
-> \end{aligned} \tag{44}
+> \end{aligned} ^{ (44) }
 > $$
 > $$
-> \Rightarrow \quad X_1 \sim p_{\text{data}}. \tag{45}
+> \Rightarrow \quad X_1 \sim p_{\text{data}}. ^{ (45) }
 > $$
 >
 > 特别地，这条 SDE 的 $X_t$ 服从 $p_t$。注意，这些随机动力学与朗之万动力学密切相关，可以理解为：在保留边缘分布 $p_t$ 的同时注入噪声。我们将在注 20 中简要讨论朗之万动力学。
@@ -120,16 +120,16 @@ $$
 >
 > 由命题 1，对高斯概率路径，定理 17 中的 SDE 可以只用分数函数表达为
 > $$
-> X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = \left( a_t + \tfrac{\sigma_t^2}{2} \right) \nabla \log p_t(X_t) + b_t X_t \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t \tag{46}
+> X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = \left( a_t + \tfrac{\sigma_t^2}{2} \right) \nabla \log p_t(X_t) + b_t X_t \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t ^{ (46) }
 > $$
 > $$
-> \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1), \tag{47}
+> \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1), ^{ (47) }
 > $$
 > 其中 $a_t$、$b_t$ 的定义同命题 1。
 
 在本节余下的部分，我们将借由 Fokker-Planck 方程证明定理 17。Fokker-Planck 方程把连续性方程从 ODE 推广到 SDE。为此，我们先定义 Laplace 算子 $\Delta$：
 $$
-\Delta w_t(x) = \sum_{i=1}^{d} \frac{\partial^2 w_t(x)}{\partial x_i^2} = \mathrm{div}(\nabla w_t)(x), \tag{48}
+\Delta w_t(x) = \sum_{i=1}^{d} \frac{\partial^2 w_t(x)}{\partial x_i^2} = \mathrm{div}(\nabla w_t)(x), ^{ (48) }
 $$
 其中 $w_t : \mathbb{R}^d \to \mathbb{R}$ 是一个标量场。
 
@@ -141,7 +141,7 @@ $$
 > $$
 > 则 $X_t$ 对所有 $0 \leq t \leq 1$ 的分布为 $p_t$，当且仅当 Fokker-Planck 方程成立：
 > $$
-> \partial_t p_t(x) = -\mathrm{div}(p_t u_t)(x) + \tfrac{\sigma_t^2}{2} \Delta p_t(x) \quad \text{对所有 } x \in \mathbb{R}^d,\ 0 \leq t \leq 1. \tag{49}
+> \partial_t p_t(x) = -\mathrm{div}(p_t u_t)(x) + \tfrac{\sigma_t^2}{2} \Delta p_t(x) \quad \text{对所有 } x \in \mathbb{R}^d,\ 0 \leq t \leq 1. ^{ (49) }
 > $$
 >
 > Fokker-Planck 方程的完整证明见附录 B。注意，当 $\sigma_t = 0$ 时，定理 11 可以从 Fokker-Planck 方程中恢复。附加的 $\Delta p_t$ 项初看可能不太好理解。熟悉物理的读者会注意到，同样的项也出现在热传导方程中（它实际上是 Fokker-Planck 方程的一个特例）。热量通过介质扩散；我们现在也加入了一个扩散过程（不是物理上的，而是数学上的），因此会引入这个附加的 Laplace 项。现在，我们用 Fokker-Planck 方程来证明定理 17。
@@ -162,7 +162,7 @@ $$
 >
 > 上述构造有一个著名的特殊情形：当概率路径为常值时，即 $p_t = p$ 对某个固定分布 $p$ 成立。这时我们取 $u_t^{\text{target}} = 0$，就得到 SDE
 > $$
-> \mathrm{d}X_t = \tfrac{\sigma_t^2}{2} \nabla \log p(X_t) \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t, \tag{50}
+> \mathrm{d}X_t = \tfrac{\sigma_t^2}{2} \nabla \log p(X_t) \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t, ^{ (50) }
 > $$
 > 这就是著名的**朗之万动力学**。$p_t$ 为常值意味着 $\partial_t p_t(x) = 0$。由定理 17 立即可得，这些动力学满足静态路径 $p_t = p$ 的 Fokker-Planck 方程。因此，我们可以得出结论：$p$ 是朗之万动力学的**平稳分布**：
 > $$
@@ -208,7 +208,7 @@ $$
 >
 > 让我们把去噪分数匹配损失具体地实例化到 $p_t(x\mid z) = \mathcal{N}(\alpha_t z,\,\beta_t^2 I_d)$ 的情形。由式 (40)，条件分数 $\nabla \log p_t(x\mid z)$ 的公式为
 > $$
-> \nabla \log p_t(x\mid z) = -\frac{x - \alpha_t z}{\beta_t^2}. \tag{51}
+> \nabla \log p_t(x\mid z) = -\frac{x - \alpha_t z}{\beta_t^2}. ^{ (51) }
 > $$
 >
 > 代入此公式，条件分数匹配损失变为：
@@ -251,16 +251,16 @@ $$
 >
 > 设 $p_t(x\mid z)$、$p_t(x)$ 是条件与边缘概率路径。条件分数函数为 $\nabla \log p_t(x\mid z)$，边缘分数函数为 $\nabla \log p_t(x)$。对任意扩散系数 $\sigma_t \geq 0$，下面 SDE 的轨迹沿着这条概率路径：
 > $$
-> X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = \left( u_t^{\text{target}}(X_t) + \tfrac{\sigma_t^2}{2} \nabla \log p_t(X_t) \right) \mathrm{d}t + \sigma_t \,\mathrm{d}W_t \tag{52}
+> X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = \left( u_t^{\text{target}}(X_t) + \tfrac{\sigma_t^2}{2} \nabla \log p_t(X_t) \right) \mathrm{d}t + \sigma_t \,\mathrm{d}W_t ^{ (52) }
 > $$
 > $$
-> \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1), \tag{53}
+> \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1), ^{ (53) }
 > $$
 > 其中 $u_t^{\text{target}}(x)$ 是和之前一样的边缘向量场（见式 (18)）。
 >
 > **分数匹配。** 为了学习边缘分数函数 $\nabla \log p_t(x)$，我们用一个分数网络 $s_t^\theta$，并通过去噪分数匹配训练它：
 > $$
-> \mathcal{L}_{\text{CSM}}(\theta) = \mathbb{E}_{z \sim p_{\text{data}},\, t \sim \text{Unif},\, x \sim p_t(\cdot \mid z)} \big[\, \big\| s_t^\theta(x) - \nabla \log p_t(x\mid z) \big\|^2 \,\big] \quad \text{(denoising score matching loss)} \tag{54}
+> \mathcal{L}_{\text{CSM}}(\theta) = \mathbb{E}_{z \sim p_{\text{data}},\, t \sim \text{Unif},\, x \sim p_t(\cdot \mid z)} \big[\, \big\| s_t^\theta(x) - \nabla \log p_t(x\mid z) \big\|^2 \,\big] \quad \text{(denoising score matching loss)} ^{ (54) }
 > $$
 >
 > **高斯概率路径。** 对于最常用的高斯概率路径 $p_t(x\mid z) = \mathcal{N}(x;\, \alpha_t z,\, \beta_t^2 I_d)$，我们不必分别训练 $s_t^\theta$ 和 $u_t^\theta$，因为可以用下面的公式相互转换：
@@ -269,9 +269,9 @@ $$
 > $$
 > 训练完成后，我们就可以对如下 SDE 进行模拟：
 > $$
-> X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = \left( 1 + \tfrac{\sigma_t^2}{2 a_t} \right) u_t^\theta(X_t) - \tfrac{\sigma_t^2 b_t}{2 a_t} X_t \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t \tag{55}
+> X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = \left( 1 + \tfrac{\sigma_t^2}{2 a_t} \right) u_t^\theta(X_t) - \tfrac{\sigma_t^2 b_t}{2 a_t} X_t \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t ^{ (55) }
 > $$
 > $$
-> = \left( a_t + \tfrac{\sigma_t^2}{2} \right) s_t^\theta(X_t) + b_t X_t \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t \tag{56}
+> = \left( a_t + \tfrac{\sigma_t^2}{2} \right) s_t^\theta(X_t) + b_t X_t \,\mathrm{d}t + \sigma_t \,\mathrm{d}W_t ^{ (56) }
 > $$
 > 选取任意扩散系数 $\sigma_t \geq 0$，就可以得到近似样本 $X_1 \sim p_{\text{data}}$。最优的 $\sigma_t \geq 0$ 可以凭经验确定。

@@ -74,30 +74,30 @@
 
 设数据 $x = (x^1, \dots, x^d) \in \mathbb{R}^d$，标准欧氏内积 $\langle x, y \rangle = \sum_{i=1}^d x^i y^i$，范数 $\|x\| = \sqrt{\langle x, x \rangle}$。我们考虑**带连续概率密度函数（probability density function, PDF）** 的随机变量（random variables, RVs）$X \in \mathbb{R}^d$：
 $$
-p_X : \mathbb{R}^d \to \mathbb{R}_{\geq 0}, \quad \mathbb{P}(X \in A) = \int_A p_X(x)\, \mathrm{d}x, \quad \int p_X(x)\, \mathrm{d}x = 1. \tag{96}
+p_X : \mathbb{R}^d \to \mathbb{R}_{\geq 0}, \quad \mathbb{P}(X \in A) = \int_A p_X(x)\, \mathrm{d}x, \quad \int p_X(x)\, \mathrm{d}x = 1. ^{ (96) }
 $$
 我们有时省略积分区域（默认整个 $\mathbb{R}^d$），并简记"PDF 为 $p$ 的 RV $X_t$"为 $p_t$。记号 $X \sim p$ 或 $X \sim p(X)$ 表示 $X$ 服从 $p$。
 
 **$d$ 维各向同性高斯（isotropic Gaussian）**：
 $$
-\mathcal{N}(x; \mu, \sigma^2 I) = (2\pi\sigma^2)^{-d/2} \exp\!\left( -\frac{\|x - \mu\|_2^2}{2\sigma^2} \right), \tag{97}
+\mathcal{N}(x; \mu, \sigma^2 I) = (2\pi\sigma^2)^{-d/2} \exp\!\left( -\frac{\|x - \mu\|_2^2}{2\sigma^2} \right), ^{ (97) }
 $$
 其中 $\mu \in \mathbb{R}^d$、$\sigma \in \mathbb{R}_{>0}$ 分别是均值与标准差。
 
 **期望的 $L^2$ 投影定义**：$\mathbb{E}[X]$ 是 $L^2$ 范数下离 $X$ "最近"的常数向量：
 $$
-\mathbb{E}[X] = \arg\min_{z \in \mathbb{R}^d} \int \|x - z\|^2 p_X(x)\, \mathrm{d}x = \int x\, p_X(x)\, \mathrm{d}x. \tag{98}
+\mathbb{E}[X] = \arg\min_{z \in \mathbb{R}^d} \int \|x - z\|^2 p_X(x)\, \mathrm{d}x = \int x\, p_X(x)\, \mathrm{d}x. ^{ (98) }
 $$
 **无意识统计学家定律（law of the unconscious statistician, LOTUS）**：
 $$
-\mathbb{E}[f(X)] = \int f(x)\, p_X(x)\, \mathrm{d}x. \tag{99}
+\mathbb{E}[f(X)] = \int f(x)\, p_X(x)\, \mathrm{d}x. ^{ (99) }
 $$
 
 ### A.2 条件密度与条件期望
 
 设两个 RV $X, Y \in \mathbb{R}^d$，**联合 PDF** $p_{X,Y}(x, y)$ 有**边缘**：
 $$
-\int p_{X,Y}(x, y)\, \mathrm{d}y = p_X(x), \quad \int p_{X,Y}(x, y)\, \mathrm{d}x = p_Y(y). \tag{100}
+\int p_{X,Y}(x, y)\, \mathrm{d}y = p_X(x), \quad \int p_{X,Y}(x, y)\, \mathrm{d}x = p_Y(y). ^{ (100) }
 $$
 图 21 展示了一个二维 $d = 1$ 联合 PDF 的例子（橙红色等高线为联合分布，黑色实线为两个边缘）。
 
@@ -107,27 +107,27 @@ $$
 
 **条件 PDF**（$p_Y(y) > 0$）：
 $$
-p_{X \mid Y}(x \mid y) := \frac{p_{X,Y}(x, y)}{p_Y(y)}. \tag{101}
+p_{X \mid Y}(x \mid y) := \frac{p_{X,Y}(x, y)}{p_Y(y)}. ^{ (101) }
 $$
 **贝叶斯公式（Bayes' rule）**：
 $$
-p_{Y \mid X}(y \mid x) = \frac{p_{X \mid Y}(x \mid y)\, p_Y(y)}{p_X(x)}, \quad p_X(x) > 0. \tag{102}
+p_{Y \mid X}(y \mid x) = \frac{p_{X \mid Y}(x \mid y)\, p_Y(y)}{p_X(x)}, \quad p_X(x) > 0. ^{ (102) }
 $$
 **条件期望** $\mathbb{E}[X \mid Y]$ 是给定 $Y$ 后 $X$ 的"最佳 $L^2$ 估计"：
 $$
-g^\star := \arg\min_{g : \mathbb{R}^d \to \mathbb{R}^d} \mathbb{E}\!\left[ \|X - g(Y)\|^2 \right] = \arg\min_{g : \mathbb{R}^d \to \mathbb{R}^d} \int \|x - g(y)\|^2\, p_{X \mid Y}(x \mid y)\, \mathrm{d}x\, p_Y(y)\, \mathrm{d}y. \tag{103}
+g^\star := \arg\min_{g : \mathbb{R}^d \to \mathbb{R}^d} \mathbb{E}\!\left[ \|X - g(Y)\|^2 \right] = \arg\min_{g : \mathbb{R}^d \to \mathbb{R}^d} \int \|x - g(y)\|^2\, p_{X \mid Y}(x \mid y)\, \mathrm{d}x\, p_Y(y)\, \mathrm{d}y. ^{ (103) }
 $$
 逐 $y$ 取最小，得
 $$
-\mathbb{E}[X \mid Y = y] := g^\star(y) = \int x\, p_{X \mid Y}(x \mid y)\, \mathrm{d}x. \tag{104}
+\mathbb{E}[X \mid Y = y] := g^\star(y) = \int x\, p_{X \mid Y}(x \mid y)\, \mathrm{d}x. ^{ (104) }
 $$
 而 $\mathbb{E}[X \mid Y] := g^\star(Y)$ 是一个 RV。两者注意区分：$\mathbb{E}[X \mid Y = y]$ 是 $\mathbb{R}^d \to \mathbb{R}^d$ 的函数；$\mathbb{E}[X \mid Y]$ 是 $\mathbb{R}^d$-值的 RV。
 
 **塔式性质（tower property）**：
 $$
-\mathbb{E}\!\left[ \mathbb{E}[X \mid Y] \right] = \mathbb{E}[X]. \tag{105}
+\mathbb{E}\!\left[ \mathbb{E}[X \mid Y] \right] = \mathbb{E}[X]. ^{ (105) }
 $$
-**联合条件期望**（验证式 106）：$\mathbb{E}[f(X, Y) \mid Y = y] = \int f(x, y)\, p_{X \mid Y}(x \mid y)\, \mathrm{d}x$。$\tag{107}$
+**联合条件期望**（验证式 106）：$\mathbb{E}[f(X, Y) \mid Y = y] = \int f(x, y)\, p_{X \mid Y}(x \mid y)\, \mathrm{d}x$。$^{ (107) }$
 
 > **学习提示** 主线中 **条件分数 $s_t(x \mid x_1) = \nabla \log p_t(x \mid x_1)$**（4.1 节）、**条件向量场 $u_t(x \mid x_1)$**（3.1 节）的"条件"二字指的就是 $p(\cdot \mid x_1)$——给定锚点 $x_1$ 后的条件 PDF。然后我们对 $x_1 \sim p_{\text{data}}$ 求平均得到**边缘**。这套"条件 → 边缘"模式贯穿整本书。
 
@@ -143,7 +143,7 @@ X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t(X_t)\, \mathrm{d}t + \sigma_
 $$
 则对所有 $x \in \mathbb{R}^d$、$0 \leq t \leq 1$，$X$ 的分布为 $p_t$ **当且仅当**（Fokker-Planck 方程成立）：
 $$
-\partial_t p_t(x) = -\mathrm{div}(p_t\, u_t)(x) + \frac{\sigma_t^2}{2}\, \Delta p_t(x). \tag{108}
+\partial_t p_t(x) = -\mathrm{div}(p_t\, u_t)(x) + \frac{\sigma_t^2}{2}\, \Delta p_t(x). ^{ (108) }
 $$
 
 **证明策略**：先证**必要性**（$X \sim p_t$ ⇒ Fokker-Planck），再证**充分性**（Fokker-Planck ⇒ $X \sim p_t$）。
@@ -156,18 +156,18 @@ $$
 - **等式 (109)**：两个函数 $g_1, g_2 : \mathbb{R}^d \to \mathbb{R}$ 点点相等 $\Leftrightarrow$ 它们对任意测试函数 $f$ 的积分相等。
 - **分部积分 (110) – (112)**：对任意测试函数 $f_1, f_2$（及相应的可积性条件），
 $$
-\int f_1(x) \partial_{x_i} f_2(x)\, \mathrm{d}x = -\int \partial_{x_i} f_1(x) f_2(x)\, \mathrm{d}x, \tag{110}
+\int f_1(x) \partial_{x_i} f_2(x)\, \mathrm{d}x = -\int \partial_{x_i} f_1(x) f_2(x)\, \mathrm{d}x, ^{ (110) }
 $$
 $$
-\int \nabla f_1(x) \cdot f_2(x)\, \mathrm{d}x = -\int f_1(x)\, \mathrm{div}(f_2)(x)\, \mathrm{d}x, \tag{111}
+\int \nabla f_1(x) \cdot f_2(x)\, \mathrm{d}x = -\int f_1(x)\, \mathrm{div}(f_2)(x)\, \mathrm{d}x, ^{ (111) }
 $$
 $$
-\int f_1(x) \Delta f_2(x)\, \mathrm{d}x = \int f_2(x) \Delta f_1(x)\, \mathrm{d}x. \tag{112}
+\int f_1(x) \Delta f_2(x)\, \mathrm{d}x = \int f_2(x) \Delta f_1(x)\, \mathrm{d}x. ^{ (112) }
 $$
 
 **步骤 1**：从 SDE 的随机演化出发（忽略 $R_t(h)$）：
 $$
-X_{t+h} \approx X_t + h\, u_t(X_t) + \sigma_t\, (W_{t+h} - W_t). \tag{114}
+X_{t+h} \approx X_t + h\, u_t(X_t) + \sigma_t\, (W_{t+h} - W_t). ^{ (114) }
 $$
 
 **步骤 2**：用二阶 Taylor 展开计算 $f(X_{t+h}) - f(X_t)$：
@@ -232,15 +232,15 @@ $$
 
 **证明（存在性部分）** 反之，每个线性 ODE 都有解。即对每个 $(t, x)$ 存在 $p_{t' \mid t}(X_{t'} = y \mid X_t = x)$ 满足
 $$
-p_{t \mid t}(X_t = y \mid X_t = x) = \delta_y(x), \tag{123}
+p_{t \mid t}(X_t = y \mid X_t = x) = \delta_y(x), ^{ (123) }
 $$
 $$
-\frac{\mathrm{d}}{\mathrm{d}t'} p_{t' \mid t}(X_{t'} = y \mid X_t = x) = \sum_{z \in S} Q_{t'}(y \mid z)\, p_{t' \mid t}(X_{t'} = z \mid X_t = x). \tag{124}
+\frac{\mathrm{d}}{\mathrm{d}t'} p_{t' \mid t}(X_{t'} = y \mid X_t = x) = \sum_{z \in S} Q_{t'}(y \mid z)\, p_{t' \mid t}(X_{t'} = z \mid X_t = x). ^{ (124) }
 $$
 对 $t' = t$ 取极限即得 (Eq 87)。还需验证 $\{p_{t' \mid t}\}$ 是**合法转移核**，即满足：
-- **求和为 1**：$\sum_{y \in S} p_{t' \mid t}(X_{t'} = y \mid X_t = x) = 1$，$\tag{125}$
-- **非负**：$p_{t' \mid t}(X_{t'} = y \mid X_t = x) \geq 0$，$\tag{126}$
-- **查普曼-科尔莫戈罗夫**：$\sum_{z \in S} p_{t_2 \mid t_1}(X_{t_2} = y \mid X_{t_1} = z)\, p_{t_1 \mid t_0}(X_{t_1} = z \mid X_{t_0} = x) = p_{t_2 \mid t_0}(X_{t_2} = y \mid X_{t_0} = x)$。$\tag{127}$
+- **求和为 1**：$\sum_{y \in S} p_{t' \mid t}(X_{t'} = y \mid X_t = x) = 1$，$^{ (125) }$
+- **非负**：$p_{t' \mid t}(X_{t'} = y \mid X_t = x) \geq 0$，$^{ (126) }$
+- **查普曼-科尔莫戈罗夫**：$\sum_{z \in S} p_{t_2 \mid t_1}(X_{t_2} = y \mid X_{t_1} = z)\, p_{t_1 \mid t_0}(X_{t_1} = z \mid X_{t_0} = x) = p_{t_2 \mid t_0}(X_{t_2} = y \mid X_{t_0} = x)$。$^{ (127) }$
 
 **(125) 证明**：对 $t' = t$ 显然成立。对 $t' > t$ 求导：
 $$
@@ -299,16 +299,16 @@ D_{\mathrm{KL}}(q_\phi(x, z) \Vert p_\theta(x, z)) &= D_{\mathrm{KL}}\!\left(p_{
 $$
 逐项分析：
 
-- **常数项**：$\mathbb{E}[\log p_{\text{data}}(x)] = \mathbb{E}_{x \sim p_{\text{data}}}[\log p_{\text{data}}(x)] = C$（独立于 $\phi, \theta$）。$\tag{133}$
-- **先验匹配项**：$\mathbb{E}\!\left[ \log \frac{q_\phi(z \mid x)}{p_{\text{prior}}(z)} \right] = \mathbb{E}_{x \sim p_{\text{data}}}\!\left[ D_{\mathrm{KL}}\!\left(q_\phi(z \mid x) \;\Vert\; p_{\text{prior}}(z)\right) \right]$——鼓励 $q_\phi(z \mid x)$ 接近先验 $p_{\text{prior}}(z)$。$\tag{134}$
-- **重建项**：$-\mathbb{E}\!\left[ \log p_\theta(x \mid z) \right]$——对 $x$ 的负对数似然，等价于**重建损失**（reconstruction loss）。$\tag{135}$
+- **常数项**：$\mathbb{E}[\log p_{\text{data}}(x)] = \mathbb{E}_{x \sim p_{\text{data}}}[\log p_{\text{data}}(x)] = C$（独立于 $\phi, \theta$）。$^{ (133) }$
+- **先验匹配项**：$\mathbb{E}\!\left[ \log \frac{q_\phi(z \mid x)}{p_{\text{prior}}(z)} \right] = \mathbb{E}_{x \sim p_{\text{data}}}\!\left[ D_{\mathrm{KL}}\!\left(q_\phi(z \mid x) \;\Vert\; p_{\text{prior}}(z)\right) \right]$——鼓励 $q_\phi(z \mid x)$ 接近先验 $p_{\text{prior}}(z)$。$^{ (134) }$
+- **重建项**：$-\mathbb{E}\!\left[ \log p_\theta(x \mid z) \right]$——对 $x$ 的负对数似然，等价于**重建损失**（reconstruction loss）。$^{ (135) }$
 
 去掉常数项，得到 **VAE 损失**：
 $$
-\mathcal{L}_{\text{VAE}}(\phi, \theta) = \mathbb{E}_{x \sim p_{\text{data}}}\!\left[ D_{\mathrm{KL}}\!\left(q_\phi(z \mid x) \;\Vert\; p_{\text{prior}}(z)\right) \right] - \mathbb{E}_{x \sim p_{\text{data}},\, z \sim q_\phi(\cdot \mid x)}\!\left[ \log p_\theta(x \mid z) \right] \tag{136}
+\mathcal{L}_{\text{VAE}}(\phi, \theta) = \mathbb{E}_{x \sim p_{\text{data}}}\!\left[ D_{\mathrm{KL}}\!\left(q_\phi(z \mid x) \;\Vert\; p_{\text{prior}}(z)\right) \right] - \mathbb{E}_{x \sim p_{\text{data}},\, z \sim q_\phi(\cdot \mid x)}\!\left[ \log p_\theta(x \mid z) \right] ^{ (136) }
 $$
 $$
-= D_{\mathrm{KL}}\!\left(q_\phi(x, z) \;\Vert\; p_\theta(x, z)\right) + \text{const}. \tag{137}
+= D_{\mathrm{KL}}\!\left(q_\phi(x, z) \;\Vert\; p_\theta(x, z)\right) + \text{const}. ^{ (137) }
 $$
 **结论**：VAE 损失就是**联合 $(x, z)$ 空间上的 KL 散度**。
 
@@ -316,11 +316,11 @@ $$
 
 设 $z \sim p_{\text{prior}} = \mathcal{N}(0, I_k)$，由解码器 $p_\theta(x \mid z)$ 得到生成样本：
 $$
-p_\theta(x) = \int p_\theta(x \mid z)\, p_{\text{prior}}(z)\, \mathrm{d}z. \tag{*}
+p_\theta(x) = \int p_\theta(x \mid z)\, p_{\text{prior}}(z)\, \mathrm{d}z. ^{ (*) }
 $$
 **命题 3（链式法则）** 对 $q(x, z)$、$p(x, z)$：
 $$
-D_{\mathrm{KL}}(q(z, x) \Vert p(z, x)) = D_{\mathrm{KL}}(q(x) \Vert p(x)) + \mathbb{E}_{x \sim q}\!\left[ D_{\mathrm{KL}}\!\left(q(z \mid x) \;\Vert\; p(z \mid x)\right) \right]. \tag{138}
+D_{\mathrm{KL}}(q(z, x) \Vert p(z, x)) = D_{\mathrm{KL}}(q(x) \Vert p(x)) + \mathbb{E}_{x \sim q}\!\left[ D_{\mathrm{KL}}\!\left(q(z \mid x) \;\Vert\; p(z \mid x)\right) \right]. ^{ (138) }
 $$
 由于第二项非负，**数据处理不等式（data-processing inequality）**：
 $$
@@ -328,9 +328,9 @@ D_{\mathrm{KL}}(q(x) \Vert p(x)) \leq D_{\mathrm{KL}}(q(z, x) \Vert p(z, x)).
 $$
 应用到 VAE：
 $$
-\mathcal{L}_{\text{VAE}} = D_{\mathrm{KL}}(q_\phi(x, z) \Vert p_\theta(x, z)) + \text{const} \geq D_{\mathrm{KL}}(p_{\text{data}}(x) \Vert p_\theta(x)) + \text{const}. \tag{139}
+\mathcal{L}_{\text{VAE}} = D_{\mathrm{KL}}(q_\phi(x, z) \Vert p_\theta(x, z)) + \text{const} \geq D_{\mathrm{KL}}(p_{\text{data}}(x) \Vert p_\theta(x)) + \text{const}. ^{ (139) }
 $$
-即 VAE 损失**最小化** $p_{\theta}$ 与 $p_{\text{data}}$ 之间 KL 的**上界**——所以 VAE 确实可以视为生成模型本身。$\tag{139, 140}$
+即 VAE 损失**最小化** $p_{\theta}$ 与 $p_{\text{data}}$ 之间 KL 的**上界**——所以 VAE 确实可以视为生成模型本身。$^{ (139, 140) }$
 
 > **备注 42** 当 $q_\phi(x, z) \approx p_\theta(x, z)$ 时，
 > - 边缘匹配：$q_\phi(z) = \int q_\phi(z \mid x) p_{\text{data}}(x)\, \mathrm{d}x \approx p_\theta(z) = p_{\text{prior}}(z)$（隐变量分布正则化）；
@@ -344,17 +344,17 @@ $$
 
 式 (132) 重新整理可得 **ELBO（evidence lower bound, 证据下界）**：
 $$
-\mathbb{E}_{z \sim q_\phi(\cdot \mid x)} \!\left[ \log \frac{q_\phi(z \mid x)}{p_\theta(x \mid z)\, p_{\text{prior}}(z)} \right] = \mathbb{E}_{z \sim q_\phi(\cdot \mid x)} \!\left[ \log \frac{q_\phi(z \mid x)}{p_\theta(z \mid x)} \right] - \log p_\theta(x). \tag{142}
+\mathbb{E}_{z \sim q_\phi(\cdot \mid x)} \!\left[ \log \frac{q_\phi(z \mid x)}{p_\theta(x \mid z)\, p_{\text{prior}}(z)} \right] = \mathbb{E}_{z \sim q_\phi(\cdot \mid x)} \!\left[ \log \frac{q_\phi(z \mid x)}{p_\theta(z \mid x)} \right] - \log p_\theta(x). ^{ (142) }
 $$
 由 (Eq 76)（KL 非负）$\Rightarrow D_{\mathrm{KL}}(q_\phi(z \mid x) \Vert p_\theta(z \mid x)) \geq 0$，故
 $$
-\mathbb{E}_{z \sim q_\phi(\cdot \mid x)} \!\left[ \log \frac{q_\phi(z \mid x)}{p_\theta(x \mid z)\, p_{\text{prior}}(z)} \right] \leq -\log p_\theta(x), \tag{143, 144}
+\mathbb{E}_{z \sim q_\phi(\cdot \mid x)} \!\left[ \log \frac{q_\phi(z \mid x)}{p_\theta(x \mid z)\, p_{\text{prior}}(z)} \right] \leq -\log p_\theta(x), ^{ (143, 144) }
 $$
 即左边是 $-\log p_\theta(x)$ 的下界——**ELBO**。
 
 把式 (136) 改写为
 $$
-\mathcal{L}_{\text{VAE}} = -\mathbb{E}_{x \sim p_{\text{data}}}[\mathrm{ELBO}(x; \phi, \theta)] - H(p_{\text{data}}) + \text{const} = -\mathbb{E}_{x \sim p_{\text{data}}}[\mathrm{ELBO}(x; \phi, \theta)] + \text{const}. \tag{145}
+\mathcal{L}_{\text{VAE}} = -\mathbb{E}_{x \sim p_{\text{data}}}[\mathrm{ELBO}(x; \phi, \theta)] - H(p_{\text{data}}) + \text{const} = -\mathbb{E}_{x \sim p_{\text{data}}}[\mathrm{ELBO}(x; \phi, \theta)] + \text{const}. ^{ (145) }
 $$
 所以**最小化 VAE 损失 = 最大化期望 ELBO**。
 
@@ -402,7 +402,7 @@ $$
 
 **第一波扩散模型**（[41, 42, 17, 45]）不使用"概率路径（probability path）"一词，而是用**前向过程（forward process）**——一个把数据点 $z \in \mathbb{R}^d$ "加噪"为 $\bar{X}_t$ 的 SDE：
 $$
-\bar{X}_0 = z, \quad \mathrm{d}\bar{X}_t = u_t^{\text{forw}}(\bar{X}_t)\, \mathrm{d}t + \sigma_t^{\text{forw}}\, \mathrm{d}\bar{W}_t. \tag{146}
+\bar{X}_0 = z, \quad \mathrm{d}\bar{X}_t = u_t^{\text{forw}}(\bar{X}_t)\, \mathrm{d}t + \sigma_t^{\text{forw}}\, \mathrm{d}\bar{W}_t. ^{ (146) }
 $$
 设计原则是 $t \to \infty$ 时 $\bar{X}_t \to \mathcal{N}(0, I_d)$（即对一个大的 $T$，$\bar{X}_T \approx \mathcal{N}(0, I_d)$）。
 
@@ -410,7 +410,7 @@ $$
 
 **但用前向过程**有一个限制：**需要知道 $X_t \mid X_0 = z$ 的闭式分布**才能训练模型（避免模拟 SDE）。这强制 $u_t^{\text{forw}}$ 取**仿射形式** $u_t^{\text{forw}}(x) = a_t x$（$a_t$ 是某个连续函数）。此时条件分布已知为高斯（参见 [40, 44, 23]）：
 $$
-\bar{X}_t \mid \bar{X}_0 = z \sim \mathcal{N}(\alpha_t z, \beta_t^2 I), \quad \alpha_t = \exp\!\left( \int_0^t a_r\, \mathrm{d}r \right), \quad \beta_t^2 = \alpha_t^2 \int_0^t \frac{\sigma_r^2}{\alpha_r^2}\, \mathrm{d}r. \tag{*}
+\bar{X}_t \mid \bar{X}_0 = z \sim \mathcal{N}(\alpha_t z, \beta_t^2 I), \quad \alpha_t = \exp\!\left( \int_0^t a_r\, \mathrm{d}r \right), \quad \beta_t^2 = \alpha_t^2 \int_0^t \frac{\sigma_r^2}{\alpha_r^2}\, \mathrm{d}r. ^{ (*) }
 $$
 
 > **结论**：**前向过程 = 一种构造（高斯）概率路径的特定方式**。主线使用 [25] 引入的"概率路径"概念更通用、更简洁：
@@ -421,11 +421,11 @@ $$
 
 **时间反演（time-reversal）** 是扩散模型的另一种训练目标构造法，源于 [2] Anderson。给定一个**前向过程** $\bar{X} = (\bar{X}_t)_{0 \leq t \leq T}$，其**时间反演**是一个 SDE $(X_t)_{0 \leq t \leq T}$，满足
 $$
-\mathbb{P}[\bar{X}_{t_1} \in A_1, \dots, \bar{X}_{t_n} \in A_n] = \mathbb{P}[X_{T - t_1} \in A_1, \dots, X_{T - t_n} \in A_n] \tag{147}
+\mathbb{P}[\bar{X}_{t_1} \in A_1, \dots, \bar{X}_{t_n} \in A_n] = \mathbb{P}[X_{T - t_1} \in A_1, \dots, X_{T - t_n} \in A_n] ^{ (147) }
 $$
 对所有 $0 \leq t_1 \leq \cdots \leq t_n \leq T$ 和集合 $A_1, \dots, A_n$。Anderson [2] 证明时间反演 SDE 取如下形式：
 $$
-\mathrm{d}X_t = \big[ -u_{T - t}(X_t) + \sigma_{T - t}^2 \nabla \log p_{T - t}(X_t) \big]\, \mathrm{d}t + \sigma_{T - t}\, \mathrm{d}W_t, \tag{148}
+\mathrm{d}X_t = \big[ -u_{T - t}(X_t) + \sigma_{T - t}^2 \nabla \log p_{T - t}(X_t) \big]\, \mathrm{d}t + \sigma_{T - t}\, \mathrm{d}W_t, ^{ (148) }
 $$
 其中 $u_t(x) = u_t^{\text{forw}}(x)$、$\sigma_t = \sigma_t^{\text{forw}}$。当 $u_t(x) = a_t x$（即仿射）时，上式是主线**命题 1** 训练目标的一个特例（不同时间约定）。
 

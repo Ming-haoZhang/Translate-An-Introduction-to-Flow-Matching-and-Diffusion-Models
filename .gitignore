@@ -2,6 +2,29 @@
 # MIT6.S184 翻译项目 — .gitignore
 # ============================================================
 
+# -------- 备份 / 中间产物 --------
+*.md.bak
+*.md.bak2
+debug_*.png
+test_*.png
+*_search.png
+*_v2.png
+*_v3.png
+*_v4.png
+*_v5.png
+*_small.png
+*_precise.png
+*_check.png
+*_tight.png
+*_notrim.png
+
+# PDF 提取 / 裁图中间产物
+translations/work/
+
+# -------- PDF 文件（项目不内嵌，用 arXiv 在线看） --------
+*.pdf
+*.pdf.tmp
+
 # -------- Python --------
 __pycache__/
 *.py[cod]
@@ -41,26 +64,6 @@ Thumbs.db
 
 # Notebook
 .ipynb_checkpoints/
-
-# -------- PDF 提取中间产物 --------
-# 这些是从源 PDF 重新生成的，不需要进 git
-translations/work/
-*.pdf.tmp
-
-# 调试图片
-*.md.bak
-debug_*.png
-test_*.png
-_search.png
-_v2.png
-_v3.png
-_v4.png
-_v5.png
-_small.png
-_precise.png
-_check.png
-_tight.png
-_notrim.png
 
 # -------- 模型 / 数据 --------
 *.pt

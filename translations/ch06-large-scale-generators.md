@@ -21,13 +21,13 @@
 **时间嵌入（Embedding Time）**。对于简单的玩具模型，将 $t$ 的原始值与输入拼接就足以训练一个性能尚可的网络。在实践中，标量时间通常使用傅里叶特征（Fourier features）被嵌入到更高维的空间中，从而使模型能够更忠实地捕捉高频时间依赖 [46]。具体而言，特征化方式为
 
 $$
-\text{TimeEmb}(t) = \left[ \cos(2\pi w_1 t), \cdots, \cos(2\pi w_{d/2} t), \sin(2\pi w_1 t), \cdots, \sin(2\pi w_{d/2} t) \right]^{\top}, \tag{68}
+\text{TimeEmb}(t) = \left[ \cos(2\pi w_1 t), \cdots, \cos(2\pi w_{d/2} t), \sin(2\pi w_1 t), \cdots, \sin(2\pi w_{d/2} t) \right]^{\top}, ^{ (68) }
 $$
 
 其中频率 $w_i$ 按以下方式设置：
 
 $$
-w_i = w_{\min} \left( \frac{w_{\max}}{w_{\min}} \right)^{\frac{i-1}{d/2-1}}, \quad i = 1, \ldots, d/2. \tag{69}
+w_i = w_{\min} \left( \frac{w_{\max}}{w_{\min}} \right)^{\frac{i-1}{d/2-1}}, \quad i = 1, \ldots, d/2. ^{ (69) }
 $$
 
 这种 $\text{TimeEmb}$ 的选择是标准的选择，但这个具体形式并不是严格必需的。上述方法只是一种获取维度为 $d$ 的归一化嵌入的便捷方式，即 $\|\text{TimeEmb}(t)\| = 1$（因为 $\sin^2 + \cos^2 = 1$）。
@@ -67,7 +67,7 @@ $$
 请注意，所有元素现在都具有 Transformer 所需的隐藏维度。扩散 Transformer 然后通过 DiTBlock（关于细节请参见备注 29）中的 Transformer 层迭代更新 $\tilde{z}$，对 $i = 0, \ldots, L-1$：
 
 $$
-\tilde{x}_{i+1} = \text{DiTBlock}(\tilde{x}_i, \tilde{t}, \tilde{y}) \in \mathbb{R}^{N \times d}, \quad (i = 0, \ldots, L-1). \tag{70}
+\tilde{x}_{i+1} = \text{DiTBlock}(\tilde{x}_i, \tilde{t}, \tilde{y}) \in \mathbb{R}^{N \times d}, \quad (i = 0, \ldots, L-1). ^{ (70) }
 $$
 
 其中 $L$ 是层数。最后，一个最终操作施加去块化操作，将 DiT 输出映射回所需的输出形状：

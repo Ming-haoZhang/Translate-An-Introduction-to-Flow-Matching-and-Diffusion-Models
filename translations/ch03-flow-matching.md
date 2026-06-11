@@ -30,7 +30,7 @@ $$
 下面，对于一个数据点 $z \in \mathbb{R}^d$，我们用 $\delta_z$ 表示 **Dirac delta** "分布"。它是我们能想到的最简单的分布：从 $\delta_z$ 中采样总是返回 $z$（即它是确定性的）。一组**条件（插值型）概率路径（conditional (interpolating) probability path）**指的是 $\mathbb{R}^d$ 上的一族分布 $p_t(\cdot | z)$，满足：
 
 $$
-p_0(\cdot | z) = p_{\text{init}}, \quad p_1(\cdot | z) = \delta_z \quad \text{for all } z \in \mathbb{R}^d. \tag{11}
+p_0(\cdot | z) = p_{\text{init}}, \quad p_1(\cdot | z) = \delta_z \quad \text{for all } z \in \mathbb{R}^d. ^{ (11) }
 $$
 
 换言之，条件概率路径**逐步地**将初始分布 $p_{\text{init}}$ 转化为**单一**数据点（参见 Figure 4）。你可以把概率路径想象成是分布在"分布空间"中的轨迹。
@@ -51,7 +51,7 @@ $$
 注意，**我们知道如何从 $p_t$ 中采样**，但**我们不知道 $p_t(x)$ 的密度值**——因为该积分难以处理（intractable，即我们实际可以计算式 (12)，但无法计算式 (13)）。请你自己验证一下：因为 $p_t(\cdot | z)$ 满足式 (11) 中的条件，边缘概率路径 $p_t$ 在 $p_{\text{init}}$ 和 $p_{\text{data}}$ 之间插值：
 
 $$
-p_0 = p_{\text{init}} \quad \text{and} \quad p_1 = p_{\text{data}}. \quad &\blacktriangleright\ \text{noise-data interpolation} \tag{14}
+p_0 = p_{\text{init}} \quad \text{and} \quad p_1 = p_{\text{data}}. \quad &\blacktriangleright\ \text{noise-data interpolation} ^{ (14) }
 $$
 
 到目前为止，最重要的一类概率路径是**高斯概率路径（Gaussian probability path）**——因此，我们强烈建议你认真阅读下一个例子。
@@ -60,7 +60,7 @@ $$
 >
 > 一个特别常用的概率路径是**高斯概率路径**。它是**当前最先进模型**所使用的概率路径。设 $\alpha_t, \beta_t$ 为**噪声调度器（noise schedulers）**：两个连续可微、单调的函数，且 $\alpha_0 = \beta_1 = 0$、$\alpha_1 = \beta_0 = 1$。我们据此定义条件概率路径：
 >
-> $$p_t(\cdot | z) = \mathcal{N}(\alpha_t z,\ \beta_t^2 I_d) \quad &\blacktriangleright\ \text{Gaussian conditional path} \tag{15}$$
+> $$p_t(\cdot | z) = \mathcal{N}(\alpha_t z,\ \beta_t^2 I_d) \quad &\blacktriangleright\ \text{Gaussian conditional path} ^{ (15) }$$
 >
 > 由我们对 $\alpha_t$、$\beta_t$ 施加的条件：
 >
@@ -73,7 +73,7 @@ $$
 >
 > 其中我们用到了"均值为 $z$、方差为 $0$ 的正态分布就是 $\delta_z$"这一事实。因此，这种 $p_t(x | z)$ 的选择对 $p_{\text{init}} = \mathcal{N}(0, I_d)$ 满足式 (11)，从而是一个合法的条件插值路径。在 Figure 4 中，我们把它在一张图像上的应用做了可视化。我们可以把"从边缘路径 $p_t$ 中采样"表达为：
 >
-> $$z \sim p_{\text{data}}, \quad \epsilon \sim p_{\text{init}} = \mathcal{N}(0, I_d) \quad \Rightarrow \quad x = \alpha_t z + \beta_t \epsilon \sim p_t \quad &\blacktriangleright\ \text{sampling from marginal Gaussian path} \tag{16}$$
+> $$z \sim p_{\text{data}}, \quad \epsilon \sim p_{\text{init}} = \mathcal{N}(0, I_d) \quad \Rightarrow \quad x = \alpha_t z + \beta_t \epsilon \sim p_t \quad &\blacktriangleright\ \text{sampling from marginal Gaussian path} ^{ (16) }$$
 >
 > 直观地，上述过程对低 $t$ 加入更多噪声，直到 $t=0$ 时只剩纯噪声；在 $t=1$ 时则没有噪声（见 Figure 5）。
 
@@ -84,7 +84,7 @@ $$
 对每个数据点 $z \in \mathbb{R}^d$，我们令 $u_t^{\text{target}}(x | z)$ 表示一个**条件向量场（conditional vector field）**。它可以是任何向量场，只要对应的 ODE 能产生条件概率路径 $p_t(\cdot | z)$，即满足：
 
 $$
-X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t^{\text{target}}(X_t | z)\, \mathrm{d}t \quad \Rightarrow \quad X_t \sim p_t(\cdot | z) \quad (0 \leq t \leq 1). \tag{17}
+X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t^{\text{target}}(X_t | z)\, \mathrm{d}t \quad \Rightarrow \quad X_t \sim p_t(\cdot | z) \quad (0 \leq t \leq 1). ^{ (17) }
 $$
 
 我们通常可以**手动**（即只需做一些代数推导）解析地求出条件向量场 $u_t^{\text{target}}(\cdot | z)$。在 Example 10 中，我们就为运行示例中的高斯概率路径推导出条件向量场 $u_t(x | z)$。
@@ -95,11 +95,11 @@ $$
 >
 > 设 $u_t^{\text{target}}(x | z)$ 是一个条件向量场（如式 (17) 所定义）。则由下式定义的**边缘向量场（marginal vector field）** $u_t^{\text{target}}(x)$
 >
-> $$u_t^{\text{target}}(x) = \int u_t^{\text{target}}(x | z)\, \frac{p_t(x | z)\, p_{\text{data}}(z)}{p_t(x)}\, \mathrm{d}z, \tag{18}$$
+> $$u_t^{\text{target}}(x) = \int u_t^{\text{target}}(x | z)\, \frac{p_t(x | z)\, p_{\text{data}}(z)}{p_t(x)}\, \mathrm{d}z, ^{ (18) }$$
 >
 > 沿着边缘概率路径走，即：
 >
-> $$X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t^{\text{target}}(X_t)\, \mathrm{d}t \quad \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1). \tag{19}$$
+> $$X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t^{\text{target}}(X_t)\, \mathrm{d}t \quad \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1). ^{ (19) }$$
 >
 > 特别地，对该 ODE 而言 $X_1 \sim p_{\text{data}}$，所以我们可以说"$u_t^{\text{target}}$ **将噪声 $p_{\text{init}}$ 转化为数据 $p_{\text{data}}$**"。
 
@@ -111,13 +111,13 @@ $$
 >
 > 和之前一样，设 $p_t(\cdot | z) = \mathcal{N}(\alpha_t z, \beta_t^2 I_d)$，其中 $\alpha_t$、$\beta_t$ 为噪声调度器（见式 (15)）。令 $\dot{\alpha}_t = \partial_t \alpha_t$、$\dot{\beta}_t = \partial_t \beta_t$ 分别表示 $\alpha_t$ 和 $\beta_t$ 的时间导数。下面我们要说明，下面给定的**条件高斯向量场（conditional Gaussian vector field）**
 >
-> $$u_t^{\text{target}}(x | z) = \left( \dot{\alpha}_t - \frac{\dot{\beta}_t}{\beta_t} \alpha_t \right) z + \frac{\dot{\beta}_t}{\beta_t}\, x \tag{20}$$
+> $$u_t^{\text{target}}(x | z) = \left( \dot{\alpha}_t - \frac{\dot{\beta}_t}{\beta_t} \alpha_t \right) z + \frac{\dot{\beta}_t}{\beta_t}\, x ^{ (20) }$$
 >
 > 在定理 9 的意义下是一个合法的条件向量场模型：其 ODE 轨迹 $X_t$ 在 $X_0 \sim \mathcal{N}(0, I_d)$ 时满足 $X_t \sim p_t(\cdot | z) = \mathcal{N}(\alpha_t z, \beta_t^2 I_d)$。在 Figure 6 中，我们通过把从条件概率路径（真值）采出的样本与从该流模拟的 ODE 轨迹的样本做对比，可视化地确认了这一点——可以看到，二者的分布是匹配的。下面我们给出证明。
 >
 > ***证明***：我们先通过定义
 >
-> $$\psi_t^{\text{target}}(x | z) = \alpha_t z + \beta_t x \tag{21}$$
+> $$\psi_t^{\text{target}}(x | z) = \alpha_t z + \beta_t x ^{ (21) }$$
 >
 > 构造一个条件流模型 $\psi_t^{\text{target}}$。若 $X_t$ 是 $\psi_t^{\text{target}}(\cdot | z)$ 在 $X_0 \sim p_{\text{init}} = \mathcal{N}(0, I_d)$ 下的 ODE 轨迹，则由定义有
 >
@@ -142,7 +142,7 @@ $$
 >
 > 本节余下部分会把这种直觉变得严格，并证明定理 9。我们用的主要数学工具是**连续性方程（continuity equation）**——它在数学与物理中都是一条基本方程。首先定义**散度算子** $\mathrm{div}$：
 >
-> $$\mathrm{div}(v_t)(x) = \sum_{i=1}^{d} \frac{\partial v_t^i(x)}{\partial x^i} \tag{22}$$
+> $$\mathrm{div}(v_t)(x) = \sum_{i=1}^{d} \frac{\partial v_t^i(x)}{\partial x^i} ^{ (22) }$$
 >
 > 其中 $v_t^i$ 是 $v_t$ 的第 $i$ 个坐标。
 
@@ -150,7 +150,7 @@ $$
 >
 > 考虑一个流模型，其向量场为 $u_t^{\text{target}}$，且 $X_0 \sim p_{\text{init}} = p_0$。则对所有 $0 \leq t \leq 1$，当且仅当
 >
-> $$\partial_t p_t(x) = -\mathrm{div}\bigl(p_t\, u_t^{\text{target}}\bigr)(x) \quad \text{for all } x \in \mathbb{R}^d,\ 0 \leq t \leq 1, \tag{23}$$
+> $$\partial_t p_t(x) = -\mathrm{div}\bigl(p_t\, u_t^{\text{target}}\bigr)(x) \quad \text{for all } x \in \mathbb{R}^d,\ 0 \leq t \leq 1, ^{ (23) }$$
 >
 > 成立时，才有 $X_t \sim p_t$。其中 $\partial_t p_t(x) = \frac{\mathrm{d} p_t(x)}{\mathrm{d}t}$ 表示 $p_t(x)$ 的时间导数。式 (23) 即所谓的**连续性方程**。
 >
@@ -190,7 +190,7 @@ $$
 然而我们还没有真正完成——虽然我们已经通过定理 9 知道了 $u_t^{\text{target}}$ 的表达式，但**我们不能高效地计算它**，因为其中那个积分不可解。我们将利用条件向量场 $u_t^{\text{target}}(x | z)$ 实际上是**可解**的这一事实。为此，我们定义**条件流匹配损失（conditional flow matching loss）**：
 
 $$
-\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t \sim \mathrm{Unif},\ z \sim p_{\text{data}},\ x \sim p_t(\cdot | z)} \bigl[\, \| u_t^\theta(x) - u_t^{\text{target}}(x | z) \|^2 \,\bigr]. \tag{26}
+\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t \sim \mathrm{Unif},\ z \sim p_{\text{data}},\ x \sim p_t(\cdot | z)} \bigl[\, \| u_t^\theta(x) - u_t^{\text{target}}(x | z) \|^2 \,\bigr]. ^{ (26) }
 $$
 
 注意它与式 (24) 的区别：我们用的是条件向量场 $u_t^{\text{target}}(x | z)$ 而非边缘向量场 $u_t^{\text{target}}(x)$。由于 $u_t^{\text{target}}(x | z)$ 有解析表达式，我们能轻松地最小化上述损失。但是，等等：我们要回归的目标明明是边缘向量场，对条件向量场做回归有什么意义呢？事实证明，**对那个"好算"的条件向量场做显式回归，等价于对那个"算不出来"的边缘向量场做隐式回归**。下面这条定理让这一直觉变得严格。
@@ -244,7 +244,7 @@ $$
 >
 > 因此，**流匹配训练等价于最小化条件流匹配损失**。训练过程见 **Algorithm 3**，可视化见 **Figure 7**。值得注意的是这个算法的几个突出优点：**第一**，训练中我们**完全不需要**模拟 ODE——人们称这个特性为 **simulation-free（无模拟）**。这让训练极其廉价，因为我们不必在训练中展开 ODE 的轨迹（那需要很多步）。**第二**，训练就是简单的回归问题——我们只不过是在对 $u_t^{\text{target}}(x | z)$ 做回归。所以它和监督学习没有本质区别。**第三**，这个算法极为简洁——很难再想出一个比它更简单的训练目标了。所有这些都使流匹配成为大规模机器学习模型极具吸引力的方法。训练好 $u_t^\theta$ 之后，我们就可以用例如 **Algorithm 1** 来模拟流模型
 >
-> $$\mathrm{d}X_t = u_t^\theta(X_t)\, \mathrm{d}t,\quad X_0 \sim p_{\text{init}} \tag{27}$$
+> $$\mathrm{d}X_t = u_t^\theta(X_t)\, \mathrm{d}t,\quad X_0 \sim p_{\text{init}} ^{ (27) }$$
 >
 > 从而得到样本 $X_1 \sim p_{\text{data}}$。这整套流程在文献 [25, 27, 1, 26] 中被称为**流匹配（flow matching）**。下面我们把条件流匹配损失具体化到高斯概率路径的情形。
 
@@ -267,11 +267,11 @@ $$
 >
 > 让我们回到高斯概率路径的例子 $p_t(\cdot | z) = \mathcal{N}(\alpha_t z, \beta_t^2 I_d)$，其中可以通过下式从条件路径中采样：
 >
-> $$\epsilon \sim \mathcal{N}(0, I_d) \quad \Rightarrow \quad x = \alpha_t z + \beta_t \epsilon \sim \mathcal{N}(\alpha_t z, \beta_t^2 I_d) = p_t(\cdot | z). \tag{28}$$
+> $$\epsilon \sim \mathcal{N}(0, I_d) \quad \Rightarrow \quad x = \alpha_t z + \beta_t \epsilon \sim \mathcal{N}(\alpha_t z, \beta_t^2 I_d) = p_t(\cdot | z). ^{ (28) }$$
 >
 > 正如我们在式 (20) 中推导的那样，条件向量场 $u_t^{\text{target}}(x | z)$ 为
 >
-> $$u_t^{\text{target}}(x | z) = \left( \dot{\alpha}_t - \frac{\dot{\beta}_t}{\beta_t} \alpha_t \right) z + \frac{\dot{\beta}_t}{\beta_t}\, x, \tag{29}$$
+> $$u_t^{\text{target}}(x | z) = \left( \dot{\alpha}_t - \frac{\dot{\beta}_t}{\beta_t} \alpha_t \right) z + \frac{\dot{\beta}_t}{\beta_t}\, x, ^{ (29) }$$
 >
 > 其中 $\dot{\alpha}_t = \partial_t \alpha_t$、$\dot{\beta}_t = \partial_t \beta_t$ 分别是时间导数。把该表达式代入，条件流匹配损失变成：
 >
@@ -310,12 +310,12 @@ $$
 >
 > 或者等价地，$u_t^{\text{target}}$ 满足连续性方程。接下来，由
 >
-> $$u_t^{\text{target}}(x) = \int u_t^{\text{target}}(x | z)\, \frac{p_t(x | z)\, p_{\text{data}}(z)}{p_t(x)}\, \mathrm{d}z \tag{32}$$
+> $$u_t^{\text{target}}(x) = \int u_t^{\text{target}}(x | z)\, \frac{p_t(x | z)\, p_{\text{data}}(z)}{p_t(x)}\, \mathrm{d}z ^{ (32) }$$
 >
 > 定义的**边缘向量场**就沿边缘概率路径走，即
 >
-> $$X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t^{\text{target}}(X_t)\, \mathrm{d}t \quad \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1). \tag{33}$$
+> $$X_0 \sim p_{\text{init}}, \quad \mathrm{d}X_t = u_t^{\text{target}}(X_t)\, \mathrm{d}t \quad \Rightarrow \quad X_t \sim p_t \quad (0 \leq t \leq 1). ^{ (33) }$$
 >
 > 特别地，对该 ODE 而言 $X_1 \sim p_{\text{data}}$，因此 $u_t^{\text{target}}$ 真正做到了**"把噪声转化为数据"**。为了学到它，我们最小化**条件流匹配损失**：
 >
-> $$\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t \sim \mathrm{Unif},\ z \sim p_{\text{data}},\ x \sim p_t(\cdot | z)} \bigl[\, \| u_t^\theta(x) - u_t^{\text{target}}(x | z) \|^2 \,\bigr]. \tag{34}$$
+> $$\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t \sim \mathrm{Unif},\ z \sim p_{\text{data}},\ x \sim p_t(\cdot | z)} \bigl[\, \| u_t^\theta(x) - u_t^{\text{target}}(x | z) \|^2 \,\bigr]. ^{ (34) }$$

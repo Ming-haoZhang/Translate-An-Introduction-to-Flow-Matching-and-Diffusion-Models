@@ -39,12 +39,12 @@ $$
 
 接下来要问的是：如何训练一个引导流模型 $u_t^\theta(x \mid y)$？一个朴素的思路是：固定 $y$ 的某个取值，把数据分布直接取为 $p_{\text{data}}(\cdot \mid y)$。这样我们就回到了无引导的生成问题，可以用条件流匹配目标构造生成模型：
 $$
-\mathbb{E}_{z \sim p_{\text{data}}(\cdot \mid y),\, x \sim p_t(\cdot \mid z)} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big]. \tag{57}
+\mathbb{E}_{z \sim p_{\text{data}}(\cdot \mid y),\, x \sim p_t(\cdot \mid z)} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big]. ^{ (57) }
 $$
 
 请注意，标签 $y$ 并不影响条件概率路径 $p_t(\cdot \mid z)$ 或条件向量场 $u_t^{\text{target}}(x \mid z)$（原则上可以让它依赖 $y$，但这里不这么做）。把上面的期望按所有可能的 $y$ 展开，我们便得到一个**引导条件流匹配目标**：
 $$
-\mathcal{L}_{\text{CFM}}^{\text{guided}}(\theta) = \mathbb{E}_{(z, y) \sim p_{\text{data}}(z, y),\, t \sim \text{Unif}[0,1],\, x \sim p_t(\cdot \mid z)} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big]. \tag{58}
+\mathcal{L}_{\text{CFM}}^{\text{guided}}(\theta) = \mathbb{E}_{(z, y) \sim p_{\text{data}}(z, y),\, t \sim \text{Unif}[0,1],\, x \sim p_t(\cdot \mid z)} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big]. ^{ (58) }
 $$
 
 式 (58) 给出的引导目标与式 (26) 中的无引导目标的主要区别是：这里我们采样的是 $(z, y) \sim p_{\text{data}}$ 而不仅仅是 $z \sim p_{\text{data}}$。原因在于：原则上我们的数据分布是关于「图像 $z$ 与文本提示 $y$」的联合分布。在实践中，这意味着对式 (58) 的 PyTorch 实现会用一个能同时返回 $z$ 和 $y$ 批次的 dataloader。
@@ -59,15 +59,15 @@ $$
 
 **分类器引导。** 为简洁起见，我们把讨论集中在高斯概率路径上。由式 (15)，高斯条件概率路径为 $p_t(\cdot \mid z) = \mathcal{N}(\alpha_t z,\, \beta_t^2 I_d)$，其中噪声调度 $\alpha_t$、$\beta_t$ 连续可微、单调，且满足 $\alpha_0 = \beta_1 = 0$、$\alpha_1 = \beta_0 = 1$。进一步由命题 1，可以把引导向量场 $u_t^{\text{target}}(x \mid y)$ 用引导分数函数 $\nabla \log p_t(x \mid y)$ 表示为
 $$
-u_t^{\text{target}}(x \mid y) = a_t \nabla \log p_t(x \mid y) + b_t x. \tag{59}
+u_t^{\text{target}}(x \mid y) = a_t \nabla \log p_t(x \mid y) + b_t x. ^{ (59) }
 $$
 
 下一步，注意 $p_t(x \mid y)$ 是一个条件密度。因此用贝叶斯公式可把引导分数改写为
 $$
-p_t(x \mid y) = \frac{p_t(x)\,p_t(y \mid x)}{p_t(y)}, \tag{60}
+p_t(x \mid y) = \frac{p_t(x)\,p_t(y \mid x)}{p_t(y)}, ^{ (60) }
 $$
 $$
-\nabla \log p_t(x \mid y) = \nabla \log \left( \frac{p_t(x)\,p_t(y \mid x)}{p_t(y)} \right) = \nabla \log p_t(x) + \nabla \log p_t(y \mid x), \tag{61}
+\nabla \log p_t(x \mid y) = \nabla \log \left( \frac{p_t(x)\,p_t(y \mid x)}{p_t(y)} \right) = \nabla \log p_t(x) + \nabla \log p_t(y \mid x), ^{ (61) }
 $$
 
 其中我们用了梯度是关于 $x$ 求的，所以 $\nabla \log p_t(y) = 0$。于是我们可以改写为
@@ -77,7 +77,7 @@ $$
 
 注意上述等式的形式：**引导向量场 $u_t^{\text{target}}(x \mid y)$ 等于无引导向量场 $u_t^{\text{target}}(x)$ 加上引导变量 $y$ 的似然 $p_t(y \mid x)$ 的梯度**。人们观察到生成的图像与提示 $y$ 契合得不够好，最自然的想法就是把 $\nabla \log p_t(y \mid x)$ 这一项的贡献放大，得到
 $$
-\tilde{u}_t^w(x \mid y) = u_t^{\text{target}}(x) + w\, a_t \nabla \log p_t(y \mid x) \quad \text{(classifier guidance)} \tag{62}
+\tilde{u}_t^w(x \mid y) = u_t^{\text{target}}(x) + w\, a_t \nabla \log p_t(y \mid x) \quad \text{(classifier guidance)} ^{ (62) }
 $$
 
 其中 $w > 1$ 称为**引导强度（guidance scale）**。那 $\nabla \log p_t(y \mid x)$ 怎么学呢？注意它可以视为某种对**带噪数据**的分类器（即它在给定 $x$ 时输出 $y$ 的对数似然）。因此只要用监督学习就能学出来。这便引出了**分类器引导（classifier guidance）** [11, 43]（见图 12）。分类器引导后来基本被无分类器引导取代，所以这里不再深入讨论。但它正是下面要讲的无分类器引导的基础。最后请注意：$w=1$ 时，$\tilde{u}_t^w(x \mid y) = u_t^{\text{target}}(x \mid y)$，即**并不**等于「真正的」引导向量场；式 (62) 本质上是一个启发式（heuristic）。
@@ -110,10 +110,10 @@ $$
 
 **训练与无分类器引导。** 现在我们必须修改式 (58) 中的引导条件流匹配目标，以兼容 $y = \varnothing$ 的可能性。难点在于：当从 $(z, y) \sim p_{\text{data}}$ 采样时，永远取不到 $y = \varnothing$。因此我们必须人为地引入 $y = \varnothing$ 的可能。具体的做法是：引入一个超参数 $\eta$，表示把原标签 $y$ 丢弃并替换为 $\varnothing$ 的概率。由此得到 CFG 条件流匹配训练目标：
 $$
-\mathcal{L}_{\text{CFM}}^{\text{CFG}}(\theta) = \mathbb{E}_{\square} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big], \tag{63}
+\mathcal{L}_{\text{CFM}}^{\text{CFG}}(\theta) = \mathbb{E}_{\square} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big], ^{ (63) }
 $$
 $$
-\square = (z, y) \sim p_{\text{data}}(z, y),\; t \sim \text{Unif}[0,1],\; x \sim p_t(\cdot \mid z),\; \text{以概率 } \eta \text{ 把 } y \text{ 替换为 } \varnothing. \tag{64}
+\square = (z, y) \sim p_{\text{data}}(z, y),\; t \sim \text{Unif}[0,1],\; x \sim p_t(\cdot \mid z),\; \text{以概率 } \eta \text{ 把 } y \text{ 替换为 } \varnothing. ^{ (64) }
 $$
 
 > **Algorithm 5（高斯概率路径的无分类器引导训练，$p_t(x \mid z) = \mathcal{N}(x; \alpha_t z, \beta_t^2 I_d)$）**
@@ -139,15 +139,15 @@ $$
 >
 > 给定无引导的边缘向量场 $u_t^{\text{target}}(x \mid \varnothing)$、引导的边缘向量场 $u_t^{\text{target}}(x \mid y)$，以及引导强度 $w > 1$，我们定义**无分类器引导向量场**为
 > $$
-> \tilde{u}_t^w(x \mid y) = (1 - w)\, u_t^{\text{target}}(x \mid \varnothing) + w\, u_t^{\text{target}}(x \mid y). \tag{65}
+> \tilde{u}_t^w(x \mid y) = (1 - w)\, u_t^{\text{target}}(x \mid \varnothing) + w\, u_t^{\text{target}}(x \mid y). ^{ (65) }
 > $$
 >
 > 用**同一个**神经网络去逼近 $u_t^{\text{target}}(x \mid \varnothing)$ 和 $u_t^{\text{target}}(x \mid y)$，就得到下面的无分类器引导 CFM（CFG-CFM）目标：
 > $$
-> \mathcal{L}_{\text{CFM}}^{\text{CFG}}(\theta) = \mathbb{E}_{\square} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big], \tag{66}
+> \mathcal{L}_{\text{CFM}}^{\text{CFG}}(\theta) = \mathbb{E}_{\square} \big[\, \big\| u_t^\theta(x \mid y) - u_t^{\text{target}}(x \mid z) \big\|^2 \,\big], ^{ (66) }
 > $$
 > $$
-> \square = (z, y) \sim p_{\text{data}}(z, y),\; t \sim \text{Unif}[0,1],\; x \sim p_t(\cdot \mid z),\; \text{以概率 } \eta \text{ 把 } y \text{ 替换为 } \varnothing. \tag{67}
+> \square = (z, y) \sim p_{\text{data}}(z, y),\; t \sim \text{Unif}[0,1],\; x \sim p_t(\cdot \mid z),\; \text{以概率 } \eta \text{ 把 } y \text{ 替换为 } \varnothing. ^{ (67) }
 > $$
 
 用大白话说，$\mathcal{L}_{\text{CFM}}^{\text{CFG}}$ 可以按如下方式近似：
